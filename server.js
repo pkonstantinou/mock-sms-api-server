@@ -2,8 +2,13 @@ import express from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import colors from "colors";
+import connectDB from "./config/db.js";
 
-dotenv.config();
+// Load env vars
+dotenv.config({ path: "./config/.env" });
+
+// Connect to database
+connectDB();
 
 const app = express();
 
