@@ -9,18 +9,11 @@ const MessageSchema = new mongoose.Schema({
   from: {
     type: String,
     required: [true, 'Please provide sender for your message'],
-    match: [
-      /^\+\d{12}$/,
-      "Mobile number for sender should start with '+' followed by 12 digits",
-    ],
+    match: [/^[a-zA-Z\d]{3,11}$/, 'Invalid alphanumeric sender ID'],
   },
   to: {
     type: String,
     required: [true, 'Please provide receiver for your message'],
-    match: [
-      /^\+\d{12}$/,
-      "Mobile number for receiver should start with '+' followed by 12 digits",
-    ],
   },
   createdAt: {
     type: Date,
