@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
-import colors from 'colors'; // eslint-disable-line no-unused-vars
+import colors from 'colors';
 import connectDB from './config/db.js';
 import messagesRoute from './routes/messages.js';
 
@@ -20,6 +20,9 @@ app.use(express.json());
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+
+// Enable console colors
+colors.enable();
 
 // Mount routers
 app.use('/api/v1/messages', messagesRoute);
