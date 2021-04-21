@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import colors from "colors";
 import connectDB from "./config/db.js";
+import messagesRoute from "./routes/messages.js";
 
 // Load env vars
 dotenv.config({ path: "./config/.env" });
@@ -20,12 +21,8 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-app.get("/", (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "Hello from the mock SMS server!",
-  });
-});
+// Mount routers
+app.use("/api/v1/messages", messagesRoute);
 
 app.listen(process.env.PORT, () => {
   console.log(
