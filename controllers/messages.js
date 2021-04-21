@@ -1,18 +1,19 @@
+import asyncHandler from 'express-async-handler';
 import Message from '../models/Message.js';
 
 // @desc     Get all messages
 // @route    GET /api/v1/messages
 // @access   Public
-const getMessages = async (req, res) => {
+const getMessages = asyncHandler(async (req, res) => {
   const messages = await Message.find();
 
   res.status(200).json({ success: true, data: messages });
-};
+});
 
 // @desc     Get single message
 // @route    GET /api/v1/messages/:id
 // @access   Public
-const getMessage = async (req, res) => {
+const getMessage = asyncHandler(async (req, res) => {
   const message = await Message.findById(req.params.id);
 
   if (!message) {
@@ -23,15 +24,15 @@ const getMessage = async (req, res) => {
   }
 
   res.status(200).json({ success: true, data: message });
-};
+});
 
 // @desc     Create/Send message
 // @route    POST /api/v1/messages
 // @access   Public
-const createMessage = async (req, res) => {
+const createMessage = asyncHandler(async (req, res) => {
   const message = await Message.create(req.body);
 
   res.status(201).json({ success: true, data: message });
-};
+});
 
 export { getMessages, getMessage, createMessage };
