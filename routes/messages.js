@@ -1,9 +1,14 @@
 /* eslint-disable import/extensions */
 import express from 'express';
-import { helloFromSMSServer } from '../controllers/messages.js';
+import {
+  getMessages,
+  getMessage,
+  createMessage,
+} from '../controllers/messages.js';
 
 const router = express.Router();
 
-router.route('/').get(helloFromSMSServer);
+router.route('/').get(getMessages).post(createMessage);
+router.route('/:id').get(getMessage);
 
 export default router;

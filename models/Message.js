@@ -16,6 +16,10 @@ const MessageSchema = new mongoose.Schema({
     required: [true, 'Please provide receiver for your message'],
     match: [/^\+\d{12}$/, 'Please provide a valid mobile number'],
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 export default mongoose.model('Message', MessageSchema);
