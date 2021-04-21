@@ -1,5 +1,5 @@
 {
-  "name": "mock_sms_api_server",
+  "name": "mock-sms-api-server",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
