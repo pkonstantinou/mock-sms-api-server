@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 import colors from 'colors';
+import errorHandler from './middleware/error.js';
 import connectDB from './config/db.js';
 import messagesRoute from './routes/messages.js';
 
@@ -26,6 +27,9 @@ colors.enable();
 
 // Mount routers
 app.use('/api/v1/messages', messagesRoute);
+
+// Mount custom error handler
+app.use(errorHandler);
 
 app.listen(process.env.PORT, () => {
   console.log(

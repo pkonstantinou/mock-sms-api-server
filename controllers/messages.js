@@ -1,4 +1,5 @@
 import asyncHandler from 'express-async-handler';
+import ErrorResponse from '../utils/errorResponse.js';
 import Message from '../models/Message.js';
 
 // @desc     Get all messages
@@ -7,20 +8,21 @@ import Message from '../models/Message.js';
 const getMessages = asyncHandler(async (req, res) => {
   const messages = await Message.find();
 
-  res.status(200).json({ success: true, data: messages });
+  res
+    .status(200)
+    .json({ success: true, count: messages.length, data: messages });
 });
 
 // @desc     Get single message
 // @route    GET /api/v1/messages/:id
 // @access   Public
-const getMessage = asyncHandler(async (req, res) => {
+const getMessage = asyncHandler(async (req, res, next) => {
   const message = await Message.findById(req.params.id);
 
   if (!message) {
-    return res.status(404).json({
-      success: false,
-      error: `No resource found with id ${req.params.id}`,
-    });
+    return next(
+      new ErrorResponse(`No resource found with id ${req.params.id}`, 404)
+    );
   }
 
   res.status(200).json({ success: true, data: message });
