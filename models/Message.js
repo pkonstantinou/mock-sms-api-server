@@ -9,7 +9,7 @@ const MessageSchema = new mongoose.Schema({
   from: {
     type: String,
     required: [true, 'Please provide sender for your message'],
-    match: [/^[a-zA-Z\d]{3,11}$/, 'Invalid alphanumeric sender ID'],
+    match: [/^[a-zA-Z\d ]{1,11}$/, 'Invalid alphanumeric sender ID'],
   },
   to: {
     type: String,
